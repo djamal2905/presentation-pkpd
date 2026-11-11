@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>PK/PD Presentation Coach</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,600;1,500&display=swap">
+<style>
+:root{
+  --bg:#0a1012;--panel:#121c1e;--panel2:#0e1617;--text:#e6f1ef;--mute:#86a8a3;--line:rgba(120,180,175,.22);
+  --accent:#22c3b6;--strong:#5eeadb;
+  --s:#7cc4ff;--t:#c4a6ff;--a:#22c3b6;--r:#f2c66d;--q:#ff9d7a;--v:#9be38a;
+  color-scheme:dark
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 15% 0%,rgba(34,195,182,.13),transparent 35%),radial-gradient(circle at 100% 30%,rgba(124,196,255,.08),transparent 30%),var(--bg);
+  color:var(--text);font:16px/1.65 "Inter","Segoe UI",Roboto,Arial,sans-serif;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--strong)}
+.wrap{max-width:1040px;margin:0 auto;padding:28px 0 80px}
+header.hero{border:1px solid var(--line);border-radius:22px;padding:28px 30px;margin-bottom:18px;
+  background:radial-gradient(circle at 88% 15%,rgba(34,195,182,.25),transparent 42%),linear-gradient(180deg,rgba(16,27,28,.98),rgba(7,12,13,.98))}
+.eyebrow{margin:0;color:var(--strong);font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+h1{margin:6px 0 8px;font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.15;letter-spacing:-.02em;text-wrap:balance}
+h2{margin:0 0 6px;font-size:1.45rem;letter-spacing:-.01em;text-wrap:balance}
+h3{margin:0;font-size:1.1rem}
+.lead{margin:0;color:var(--mute);max-width:70ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{display:inline-flex;gap:6px;align-items:center;font-size:.84rem;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid rgba(34,195,182,.35);background:rgba(34,195,182,.08)}
+.chip b{color:var(--strong)}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;gap:6px;overflow-x:auto;padding:10px 0;margin-bottom:14px;background:linear-gradient(var(--bg) 80%,transparent)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+nav.tabs button{flex:none;font:600 .92rem inherit;font-family:inherit;color:var(--mute);background:transparent;border:1px solid var(--line);border-radius:999px;padding:9px 16px;min-height:42px;cursor:pointer}
+nav.tabs button[aria-selected="true"]{color:var(--text);background:rgba(34,195,182,.15);border-color:rgba(34,195,182,.6)}
+nav.tabs button:focus-visible,button:focus-visible{outline:2px solid var(--strong);outline-offset:2px}
+section[hidden]{display:none}
+.card{border:1px solid var(--line);border-radius:18px;padding:20px 22px;margin-bottom:14px;background:linear-gradient(180deg,rgba(18,28,30,.95),rgba(10,16,17,.95))}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.btn{font:600 .9rem inherit;font-family:inherit;border-radius:12px;padding:9px 14px;min-height:42px;cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--text)}
+.btn.primary{background:var(--accent);color:#06211e;border-color:var(--accent)}
+.muted{color:var(--mute)}
+.small{font-size:.86rem}
+/* Speech */
+.part{border-left:3px solid var(--accent);padding:4px 0 4px 16px;margin:18px 0}
+.part .time{font-size:.8rem;font-weight:700;color:var(--strong);letter-spacing:.06em}
+.part h3{margin:2px 0 8px}
+ol.lines{margin:0;padding-left:22px}
+ol.lines li{margin:4px 0}
+.practice ol.lines li{filter:blur(6px);cursor:pointer;transition:filter .2s}
+.practice ol.lines li.shown{filter:none}
+.key{color:var(--strong);font-weight:600}
+.timer{font:800 2rem "Inter",sans-serif;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.bar{height:8px;border-radius:999px;background:rgba(120,180,175,.15);overflow:hidden;margin-top:8px}
+.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--strong));transition:width .25s linear}
+/* STAR */
+.star{display:grid;gap:10px;margin-top:12px}
+.st{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start}
+.st .l{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:1.15rem;color:#0a1012}
+.st p{margin:0}
+.st ul{margin:0;padding-left:18px}
+.S .l{background:var(--s)}.T .l{background:var(--t)}.A .l{background:var(--a)}.R .l{background:var(--r)}
+.st .name{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.S .name{color:var(--s)}.T .name{color:var(--t)}.A .name{color:var(--a)}.R .name{color:var(--r)}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 0}
+.tag{font-size:.78rem;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mute)}
+.link{margin-top:12px;padding:10px 14px;border-radius:12px;background:rgba(34,195,182,.08);border:1px solid rgba(34,195,182,.3)}
+.short{margin-top:10px;padding:10px 14px;border-radius:12px;background:rgba(242,198,109,.07);border:1px dashed rgba(242,198,109,.45)}
+/* Questions */
+details.qa{border:1px solid var(--line);border-radius:14px;margin:10px 0;background:rgba(255,255,255,.02)}
+details.qa summary{cursor:pointer;list-style:none;padding:14px 16px;font-weight:600;display:flex;gap:12px;align-items:flex-start}
+details.qa summary::-webkit-details-marker{display:none}
+details.qa summary .n{flex:none;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:rgba(255,157,122,.15);color:var(--q);font-size:.85rem}
+details.qa[open] summary{border-bottom:1px solid var(--line)}
+details.qa .ans{padding:12px 16px 14px 56px}
+details.qa .ans p{margin:4px 0}
+.tip{color:var(--q);font-size:.88rem}
+/* Vocabulary */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.word{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:rgba(255,255,255,.02)}
+.word b{display:block;font-size:1.02rem}
+.word .ipa{color:var(--v);font-family:"Source Serif 4",Georgia,serif;font-style:italic}
+.word .fr{color:var(--mute);font-size:.88rem}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--strong);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase}
+.ok{color:var(--v);font-weight:600}.bad{color:var(--q);text-decoration:line-through}
+/* Checklist */
+.check{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.check input{appearance:none;-webkit-appearance:none;flex:none;width:22px;height:22px;margin-top:2px;border:1.6px solid rgba(120,180,175,.55);border-radius:7px;display:grid;place-items:center;cursor:pointer}
+.check input:checked{background:var(--accent);border-color:var(--accent);box-shadow:0 0 12px rgba(34,195,182,.5)}
+.check input:checked::after{content:"";width:6px;height:11px;border:solid #0a1012;border-width:0 2.5px 2.5px 0;transform:translate(0,-1px) rotate(45deg)}
+.check.done span{color:var(--mute);text-decoration:line-through}
+.ring{font-weight:800;color:var(--strong)}
+@media (max-width:640px){header.hero{padding:22px 18px}.card{padding:16px}.st{grid-template-columns:36px minmax(0,1fr)}.st .l{width:36px;height:36px}details.qa .ans{padding-left:16px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">English class · oral presentation</p>
+  <h1>PK/PD Modelling and Simulation Internship, Pierre Fabre</h1>
+  <p class="lead">Everything to learn for the evaluation: the pitch, the four STAR stories, the likely questions with simple answers, the key words and the grammar. Short sentences: subject, verb, complement.</p>
+  <div class="chips">
+    <span class="chip">Pitch <b>about 2 min 45</b></span>
+    <span class="chip">STAR stories <b>4</b></span>
+    <span class="chip">Questions <b>18</b></span>
+    <span class="chip">Learned <b class="ring" id="progress">0 %</b></span>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Sections">
+  <button role="tab" aria-selected="true" data-tab="pitch">1 · Pitch</button>
+  <button role="tab" aria-selected="false" data-tab="star">2 · STAR stories</button>
+  <button role="tab" aria-selected="false" data-tab="questions">3 · Questions</button>
+  <button role="tab" aria-selected="false" data-tab="offer">4 · The offer</button>
+  <button role="tab" aria-selected="false" data-tab="words">5 · Words &amp; grammar</button>
+  <button role="tab" aria-selected="false" data-tab="checklist">6 · Checklist</button>
+</nav>
+
+<!-- ================= PITCH ================= -->
+<section data-panel="pitch" role="tabpanel">
+  <div class="card">
+    <div class="row">
+      <div>
+        <h2>The pitch</h2>
+        <p class="muted small" style="margin:0">One idea per sentence. Speak slowly. Look at the audience after each part.</p>
+      </div>
+      <div class="row">
+        <button class="btn" id="practice" aria-pressed="false">Practice mode: hide the text</button>
+        <button class="btn primary" id="timerBtn">Start timer</button>
+      </div>
+    </div>
+    <div style="margin-top:14px"><span class="timer" id="timer">0:00</span> <span class="muted small">target 2:45 · maximum 3:00</span>
+      <div class="bar"><span id="timerBar"></span></div></div>
+  </div>
+
+  <div class="card" id="speech">
+    <div class="part"><div class="time">PART 1 · INTRODUCTION · 0:20</div><h3>Who I am and what I present</h3>
+      <ol class="lines">
+        <li>Good morning everyone.</li>
+        <li>My name is <span class="key">Djamal TOE</span>.</li>
+        <li>I am a final-year student at <span class="key">ENSAI</span>.</li>
+        <li>ENSAI is a French engineering school in statistics and data science.</li>
+        <li>Today, I present an internship offer from <span class="key">Pierre Fabre</span>.</li>
+        <li>The position is <span class="key">PK/PD modelling and simulation in oncology</span>.</li>
+      </ol></div>
+
+    <div class="part" style="border-color:var(--s)"><div class="time" style="color:var(--s)">PART 2 · THE OFFER · 0:35</div><h3>What the team does</h3>
+      <ol class="lines">
+        <li>Pierre Fabre is a French pharmaceutical company.</li>
+        <li>The internship takes place in <span class="key">Toulouse</span>, at the Langlade site.</li>
+        <li>The team builds mathematical models of drugs.</li>
+        <li><span class="key">PK</span> describes what the body does to the drug.</li>
+        <li><span class="key">PD</span> describes what the drug does to the body.</li>
+        <li>In oncology, the models also describe <span class="key">tumour growth</span>.</li>
+        <li>The team uses these models to make decisions, from the lab to clinical trials.</li>
+      </ol></div>
+
+    <div class="part" style="border-color:var(--t)"><div class="time" style="color:var(--t)">PART 3 · EDUCATION · 0:20</div><h3>My studies</h3>
+      <ol class="lines">
+        <li>I studied statistics and computer science in <span class="key">Burkina Faso</span>.</li>
+        <li>I got my bachelor's degree in 2023.</li>
+        <li>Now, I study data science and machine learning at ENSAI.</li>
+        <li>I will graduate in 2027.</li>
+      </ol></div>
+
+    <div class="part" style="border-color:var(--r)"><div class="time" style="color:var(--r)">PART 4 · EXPERIENCE · 0:50</div><h3>What I already did</h3>
+      <ol class="lines">
+        <li>My most relevant experience is my internship at <span class="key">Servier</span>.</li>
+        <li>Servier is also a pharmaceutical company.</li>
+        <li>I worked in the biostatistics team from May to September 2026.</li>
+        <li>I built a <span class="key">Bayesian model</span> with a tool called Stan.</li>
+        <li>The model estimates the <span class="key">probability of success</span> of a future clinical trial.</li>
+        <li>I also built an application for the team, in R Shiny.</li>
+        <li>Before that, I worked at <span class="key">Centre MURAZ</span>, in Burkina Faso.</li>
+        <li>I used <span class="key">mixed models</span> to evaluate a malaria programme.</li>
+        <li>The model estimated about <span class="key">42 percent fewer</span> malaria cases.</li>
+        <li>These experiences gave me three skills: modelling, simulation and uncertainty.</li>
+      </ol></div>
+
+    <div class="part" style="border-color:var(--v)"><div class="time" style="color:var(--v)">PART 5 · WHY THIS OFFER · 0:30</div><h3>The link with PK/PD</h3>
+      <ol class="lines">
+        <li>Population PK models are <span class="key">mixed models</span>.</li>
+        <li>I already use mixed models and Bayesian methods.</li>
+        <li>Now, I want to learn the pharmacology side.</li>
+        <li>I want to work with real oncology data.</li>
+        <li>For me, this internship is the <span class="key">next logical step</span>.</li>
+      </ol></div>
+
+    <div class="part" style="border-color:var(--q)"><div class="time" style="color:var(--q)">PART 6 · CLOSING · 0:15</div><h3>End and thank you</h3>
+      <ol class="lines">
+        <li>The internship starts in <span class="key">March 2027</span>.</li>
+        <li>It lasts <span class="key">six months</span>.</li>
+        <li>Thank you for your attention.</li>
+        <li>I am happy to answer your questions.</li>
+      </ol></div>
+  </div>
+</section>
+
+<!-- ================= STAR ================= -->
+<section data-panel="star" role="tabpanel" hidden>
+  <div class="card">
+    <h2>STAR stories</h2>
+    <p class="muted" style="margin:0">S = Situation (the context) · T = Task (my job) · A = Action (what I did, past simple: <i>I built, I used</i>) · R = Result (numbers if possible). End with the link to PK/PD.</p>
+  </div>
+
+  <article class="card">
+    <h3>Servier · Biostatistics intern</h3>
+    <div class="meta"><span class="tag">Saclay, France</span><span class="tag">May to September 2026</span><span class="tag">Stan · R Shiny · Bayesian</span></div>
+    <div class="star">
+      <div class="st S"><div class="l">S</div><div><div class="name">Situation</div><p>Servier develops cancer drugs. Before a Phase III trial, the team needs one number: the probability of success. The data is small and very different from study to study.</p></div></div>
+      <div class="st T"><div class="l">T</div><div><div class="name">Task</div><p>My task was to build a model. The model combines all past evidence. It also shows the uncertainty.</p></div></div>
+      <div class="st A"><div class="l">A</div><div><div class="name">Action</div><ul>
+        <li>I built a hierarchical Bayesian model in Stan.</li>
+        <li>I used a MAP prior. It borrows information from past trials.</li>
+        <li>I used a mixture prior for the treatment effect: one optimistic part and one sceptical part.</li>
+        <li>I added a commensurability matrix. It says how similar each past study is to the new one.</li>
+        <li>I checked the convergence and I ran sensitivity analyses.</li>
+        <li>I built an R Shiny application for the team.</li></ul></div></div>
+      <div class="st R"><div class="l">R</div><div><div class="name">Result</div><p>I delivered a decision tool with 110 unit tests. I presented the method to the team and at a biostatistics conference.</p></div></div>
+    </div>
+    <div class="link"><b>Link to PK/PD:</b> PK/PD also uses hierarchical models, priors and simulations. I already know this way of thinking.</div>
+    <div class="short"><b>30-second version:</b> At Servier, I built a Bayesian model. It predicts the success of a future trial. I combined past studies, I showed the uncertainty, and I built an app for the team.</div>
+  </article>
+
+  <article class="card">
+    <h3>Centre MURAZ · Statistical analyst</h3>
+    <div class="meta"><span class="tag">Burkina Faso</span><span class="tag">August 2023 to April 2024</span><span class="tag">R · mixed models · Shiny</span></div>
+    <div class="star">
+      <div class="st S"><div class="l">S</div><div><div class="name">Situation</div><p>Burkina Faso has a lot of malaria. A programme trained community health workers in villages. The team asked one question: did the programme work?</p></div></div>
+      <div class="st T"><div class="l">T</div><div><div class="name">Task</div><p>My task was to measure the effect of the programme. The data had many villages, many months, and a lot of variability.</p></div></div>
+      <div class="st A"><div class="l">A</div><div><div class="name">Action</div><ul>
+        <li>I used mixed Poisson and negative binomial models.</li>
+        <li>I added a random effect for each village.</li>
+        <li>I automated the analysis in R.</li>
+        <li>I built Shiny dashboards for the team.</li></ul></div></div>
+      <div class="st R"><div class="l">R</div><div><div class="name">Result</div><p>The model estimated about 42 percent fewer malaria cases in the targeted villages.</p></div></div>
+    </div>
+    <div class="link"><b>Link to PK/PD:</b> A random effect for each village is like a random effect for each patient in population PK.</div>
+    <div class="short"><b>30-second version:</b> At Centre MURAZ, I evaluated a malaria programme. I used mixed models with a random effect per village. The result was about 42 percent fewer cases.</div>
+  </article>
+
+  <article class="card">
+    <h3>Les Vieilles Charrues · Data science intern</h3>
+    <div class="meta"><span class="tag">Brittany, France</span><span class="tag">Summer 2025</span><span class="tag">R · MCA · logistic regression</span></div>
+    <div class="star">
+      <div class="st S"><div class="l">S</div><div><div class="name">Situation</div><p>Les Vieilles Charrues is a big music festival in France. It receives about 7,500 volunteer applications. The team wanted to understand the selection.</p></div></div>
+      <div class="st T"><div class="l">T</div><div><div class="name">Task</div><p>My task was to clean the data and explain the acceptance decisions.</p></div></div>
+      <div class="st A"><div class="l">A</div><div><div class="name">Action</div><ul>
+        <li>I cleaned the data.</li>
+        <li>I described the profiles with multiple correspondence analysis.</li>
+        <li>I fitted a logistic regression.</li>
+        <li>I checked the model with the Hosmer-Lemeshow test and the ROC curve.</li></ul></div></div>
+      <div class="st R"><div class="l">R</div><div><div class="name">Result</div><p>The model explains the main factors. The AUC was 0.68. So the model is useful to understand, not to decide automatically.</p></div></div>
+    </div>
+    <div class="link"><b>Link to PK/PD:</b> I always check a model before I use it. PK/PD models also need checks, for example goodness-of-fit plots.</div>
+    <div class="short"><b>30-second version:</b> For a music festival, I analysed 7,500 volunteer applications. I used a logistic regression and I validated it. I explained what the model can do and what it cannot do.</div>
+  </article>
+
+  <article class="card">
+    <h3>Academic project · Coordinated image sharing</h3>
+    <div class="meta"><span class="tag">ENSAI</span><span class="tag">2025 to 2026</span><span class="tag">Python · CLIP · UMAP · HDBSCAN</span></div>
+    <div class="star">
+      <div class="st S"><div class="l">S</div><div><div class="name">Situation</div><p>On social networks, some groups share the same images in a coordinated way. It is hard to see by hand.</p></div></div>
+      <div class="st T"><div class="l">T</div><div><div class="name">Task</div><p>Our task was to detect these groups automatically in a large dataset.</p></div></div>
+      <div class="st A"><div class="l">A</div><div><div class="name">Action</div><ul>
+        <li>We used CLIP. It turns each image into a list of numbers.</li>
+        <li>We reduced the dimension with UMAP.</li>
+        <li>We found groups with HDBSCAN.</li>
+        <li>We tested the groups with permutation tests and an FDR correction.</li></ul></div></div>
+      <div class="st R"><div class="l">R</div><div><div class="name">Result</div><p>We built a validated pipeline on more than 217,000 posts.</p></div></div>
+    </div>
+    <div class="link"><b>Link to PK/PD:</b> I know how to work with large data and many statistical tests, without false discoveries.</div>
+    <div class="short"><b>30-second version:</b> In a school project, we detected coordinated image sharing. We used CLIP, UMAP and HDBSCAN on more than 217,000 posts, and we validated the results with statistical tests.</div>
+  </article>
+</section>
+
+<!-- ================= QUESTIONS ================= -->
+<section data-panel="questions" role="tabpanel" hidden>
+  <div class="card">
+    <div class="row"><div><h2>Likely questions</h2><p class="muted small" style="margin:0">Say your answer out loud first. Then open the card and compare.</p></div>
+      <div class="row"><button class="btn" id="openAll">Open all</button><button class="btn" id="closeAll">Close all</button></div></div>
+  </div>
+  <div id="qaList"></div>
+
+  <div class="card">
+    <h2>Questions you can ask them</h2>
+    <ol class="lines">
+      <li>Which software does the team use: Monolix, NONMEM or R?</li>
+      <li>Will I work on preclinical data, clinical data, or both?</li>
+      <li>What does a typical week look like for an intern?</li>
+      <li>How do you check and validate a model in the team?</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>If you do not understand</h2>
+    <ol class="lines">
+      <li>Sorry, could you repeat the question, please?</li>
+      <li>Do you mean ...?</li>
+      <li>That is a good question. Let me think for a second.</li>
+      <li>I do not know yet, but I can explain how I would find out.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= OFFER ================= -->
+<section data-panel="offer" role="tabpanel" hidden>
+  <div class="card">
+    <h2>The offer in simple words</h2>
+    <table>
+      <tr><th>Company</th><td>Pierre Fabre Laboratories, R&amp;D Oncology</td></tr>
+      <tr><th>Team</th><td>PK/PD Modelling &amp; Simulation</td></tr>
+      <tr><th>Place</th><td>Langlade site, Toulouse, France</td></tr>
+      <tr><th>Contract</th><td>Internship, full-time, 6 months from March 2027</td></tr>
+      <tr><th>Reference</th><td>JR114220</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h2>What the intern does</h2>
+    <ol class="lines">
+      <li>The intern reads scientific articles and writes a summary.</li>
+      <li>The intern analyses preclinical and clinical data.</li>
+      <li>The intern builds and tests models: PK/PD, tumour growth inhibition (TGI), PBPK, exposure-response.</li>
+      <li>The intern runs simulations to answer development questions.</li>
+      <li>The intern works with biologists, toxicologists and clinical pharmacologists.</li>
+    </ol>
+  </div>
+  <div class="card">
+    <h2>The four model families, in one sentence each</h2>
+    <div class="grid">
+      <div class="word"><b>PK</b><span class="fr">What the body does to the drug: absorption, distribution, elimination.</span></div>
+      <div class="word"><b>PD</b><span class="fr">What the drug does to the body: the effect, for example on the tumour.</span></div>
+      <div class="word"><b>PopPK / NLME</b><span class="fr">A mixed model: an average patient plus the variability between patients.</span></div>
+      <div class="word"><b>TGI</b><span class="fr">Tumour growth inhibition: how a tumour grows, and how the drug slows it.</span></div>
+      <div class="word"><b>PBPK</b><span class="fr">A model of the body with real organs and blood flows.</span></div>
+      <div class="word"><b>Exposure-response</b><span class="fr">More drug in the blood: more effect? More side effects?</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Their wishes, my answers</h2>
+    <table>
+      <tr><th>They want</th><th>I have</th></tr>
+      <tr><td>Strong quantitative skills</td><td>Engineering degree in statistics; Bayesian and mixed models in real projects.</td></tr>
+      <tr><td>R and/or Python</td><td>R and Python every day, plus Stan and R Shiny.</td></tr>
+      <tr><td>NLME methods</td><td>Mixed Poisson and negative binomial models at Centre MURAZ; hierarchical models at Servier.</td></tr>
+      <tr><td>Interest in oncology</td><td>My Servier project was in oncology late-phase development.</td></tr>
+      <tr><td>Monolix or PK-Sim (a plus)</td><td>Not yet. I learned Stan quickly during my internship; I can learn Monolix the same way.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ================= WORDS ================= -->
+<section data-panel="words" role="tabpanel" hidden>
+  <div class="card">
+    <h2>Key words and pronunciation</h2>
+    <p class="muted small">The stressed syllable is in capitals.</p>
+    <div class="grid" id="words"></div>
+  </div>
+  <div class="card">
+    <h2>Grammar: say it right</h2>
+    <table>
+      <tr><th>Rule</th><th>Correct</th><th>Avoid</th></tr>
+      <tr><td>Past experiences: past simple</td><td class="ok">I built a model. I worked at Servier.</td><td class="bad">I have built a model in 2026.</td></tr>
+      <tr><td>Always a subject</td><td class="ok">It is a good question.</td><td class="bad">Is a good question.</td></tr>
+      <tr><td>"a" with a job</td><td class="ok">I am a student.</td><td class="bad">I am student.</td></tr>
+      <tr><td>-s with he / she / it</td><td class="ok">The model describes the drug.</td><td class="bad">The model describe the drug.</td></tr>
+      <tr><td>"Since" + a date: present perfect</td><td class="ok">I have studied at ENSAI since 2024.</td><td class="bad">I study at ENSAI since 2024.</td></tr>
+      <tr><td>"Data": no -s</td><td class="ok">The data is small.</td><td class="bad">The datas are small.</td></tr>
+      <tr><td>Information: no plural</td><td class="ok">some information</td><td class="bad">informations</td></tr>
+      <tr><td>Questions with "do"</td><td class="ok">Which software do you use?</td><td class="bad">Which software you use?</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h2>Linking words</h2>
+    <div class="grid">
+      <div class="word"><b>First, ... Then, ... Finally, ...</b><span class="fr">to order the pitch</span></div>
+      <div class="word"><b>For example, ...</b><span class="fr">to give a fact</span></div>
+      <div class="word"><b>As a result, ...</b><span class="fr">to give the result (R in STAR)</span></div>
+      <div class="word"><b>This is why ...</b><span class="fr">to explain a choice</span></div>
+      <div class="word"><b>In other words, ...</b><span class="fr">to simplify an idea</span></div>
+      <div class="word"><b>To sum up, ...</b><span class="fr">to close</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Pronunciation of -ed</h2>
+    <table>
+      <tr><th>Sound</th><th>Verbs</th></tr>
+      <tr><td>/t/</td><td>worked, checked, developed, helped</td></tr>
+      <tr><td>/d/</td><td>used, analysed, applied, delivered, explained</td></tr>
+      <tr><td>/ɪd/ (extra syllable)</td><td>estimated, presented, automated, evaluated, tested</td></tr>
+      <tr><td>Irregular</td><td>build → <b>built</b>, run → <b>ran</b>, find → <b>found</b>, give → <b>gave</b>, get → <b>got</b></td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ================= CHECKLIST ================= -->
+<section data-panel="checklist" role="tabpanel" hidden>
+  <div class="card">
+    <h2>Before the evaluation</h2>
+    <p class="muted small">Your ticks stay in this browser.</p>
+    <div id="checks"></div>
+  </div>
+</section>
+
+<p class="muted small" style="text-align:center;margin-top:30px">Prepared for the ENSAI English class. Facts come from my CV, my cover letter and the offer JR114220.</p>
+</div>
+
+<script>
+(function(){
+  const store={get(k){try{return localStorage.getItem('pkpd:'+k)}catch(e){return null}},set(k,v){try{localStorage.setItem('pkpd:'+k,v)}catch(e){}}};
+
+  /* Tabs */
+  const tabs=[...document.querySelectorAll('nav.tabs button')];
+  const show=id=>{tabs.forEach(t=>t.setAttribute('aria-selected',String(t.dataset.tab===id)));
+    document.querySelectorAll('[data-panel]').forEach(p=>p.hidden=p.dataset.panel!==id);store.set('tab',id)};
+  tabs.forEach((t,i)=>{t.addEventListener('click',()=>show(t.dataset.tab));
+    t.addEventListener('keydown',e=>{const d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(!d)return;e.preventDefault();const n=tabs[(i+d+tabs.length)%tabs.length];show(n.dataset.tab);n.focus()})});
+  show(store.get('tab')||'pitch');
+
+  /* Practice mode: blur lines, click to reveal */
+  const speech=document.getElementById('speech'), practice=document.getElementById('practice');
+  practice.addEventListener('click',()=>{const on=!speech.classList.contains('practice');speech.classList.toggle('practice',on);
+    practice.setAttribute('aria-pressed',String(on));practice.textContent=on?'Show all the text':'Practice mode: hide the text';
+    speech.querySelectorAll('li').forEach(li=>li.classList.remove('shown'))});
+  speech.addEventListener('click',e=>{const li=e.target.closest('li');if(li&&speech.classList.contains('practice'))li.classList.add('shown')});
+
+  /* Timer: target 2:45 */
+  let start=0,tick=null;const tEl=document.getElementById('timer'),bar=document.getElementById('timerBar'),tb=document.getElementById('timerBtn');
+  tb.addEventListener('click',()=>{if(tick){clearInterval(tick);tick=null;tb.textContent='Start timer';return}
+    start=Date.now();tb.textContent='Stop';tick=setInterval(()=>{const s=Math.floor((Date.now()-start)/1000);
+      tEl.textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0');bar.style.width=Math.min(100,s/180*100)+'%';
+      tEl.style.color=s>180?'var(--q)':s>165?'var(--r)':'var(--text)'},250)});
+
+  /* Questions */
+  const QA=[
+    ['Can you introduce yourself in one minute?','My name is Djamal TOE. I am a final-year student at ENSAI, in statistics and data science. I did an internship at Servier, in biostatistics. I built a Bayesian model for clinical trials. Now, I want to work in PK/PD modelling.','Use the pitch, parts 1, 3 and 4. Keep it short.'],
+    ['Why did you choose this offer?','PK/PD modelling uses the same tools as my work: mixed models, Bayesian methods and simulation. But it applies them to how a drug works in the body. I want to learn this pharmacology side, in oncology.',''],
+    ['What is PK/PD, in simple words?','PK is what the body does to the drug: absorption, distribution and elimination. PD is what the drug does to the body: the effect. Together, they link the dose to the effect.','Memorise this one. They will probably ask it.'],
+    ['What is a population PK model?','It is a nonlinear mixed-effects model. Each patient has their own parameters. The model estimates the average patient and the variability between patients.','Say "mixed-effects": it connects to your experience.'],
+    ['What is a tumour growth inhibition model?','It describes how a tumour grows over time. It also describes how the drug slows this growth. It helps to choose a good dose.',''],
+    ['Why are you a good candidate?','I have experience with hierarchical and Bayesian models in pharma. I know R, Python and Stan. I learn fast, and I like to explain models to non-statisticians.',''],
+    ['What was your biggest challenge at Servier?','Some trials had only one group, with no control group. So I used external data as a control. I modelled the bias and the similarity of each source, and I showed the uncertainty.',''],
+    ['Explain Bayesian statistics simply.','First, we have what we know before: the prior. Then, we add the new data. As a result, we get an updated belief: the posterior.',''],
+    ['Do you know Monolix or PK-Sim?','Not yet. But I know the method behind Monolix: mixed models. During my internship, I learned Stan quickly. I can learn Monolix the same way.','Be honest. Then show that you learn fast.'],
+    ['What is your main strength?','I am rigorous. I always check my models: convergence, diagnostics, sensitivity analyses. I also build tools that other people can use.',''],
+    ['What is your weakness?','Sometimes, I spend too much time on details. Now, I set a time limit for each task, and I ask for feedback early.','A real weakness, with a solution.'],
+    ['What did you learn from your experiences?','I learned to separate two things: the uncertainty of a parameter and the uncertainty of a future result. I also learned to explain my results simply.',''],
+    ['How do you work in a team?','I share my work early. I ask questions when something is not clear. At Servier, I presented my method to the team and I used their feedback.',''],
+    ['Why Pierre Fabre?','Pierre Fabre is strong in oncology. The team uses models at every stage, from the lab to the clinic. I want to learn in this kind of team.',''],
+    ['Why Toulouse? Is it a problem to move?','No, it is not a problem. I am ready to move to Toulouse for six months.',''],
+    ['When are you available?','I am available from March 2027, for six months.',''],
+    ['Where do you see yourself in five years?','I see myself in the pharmaceutical industry, in pharmacometrics or biostatistics. I want to help make better decisions in drug development.',''],
+    ['Do you have questions for us?','Yes. Which software does the team use? And will I work on preclinical data, clinical data, or both?','Always ask one or two questions.']
+  ];
+  const list=document.getElementById('qaList');
+  QA.forEach(([q,a,tip],i)=>{const d=document.createElement('details');d.className='qa';
+    d.innerHTML='<summary><span class="n">'+(i+1)+'</span><span></span></summary><div class="ans"></div>';
+    d.querySelector('summary span:last-child').textContent=q;
+    const ans=d.querySelector('.ans');a.split(/(?<=\.)\s+/).forEach(s=>{const p=document.createElement('p');p.textContent=s;ans.appendChild(p)});
+    if(tip){const t=document.createElement('p');t.className='tip';t.textContent='Tip: '+tip;ans.appendChild(t)}
+    list.appendChild(d)});
+  document.getElementById('openAll').onclick=()=>list.querySelectorAll('details').forEach(d=>d.open=true);
+  document.getElementById('closeAll').onclick=()=>list.querySelectorAll('details').forEach(d=>d.open=false);
+
+  /* Words */
+  const W=[
+    ['pharmacokinetics','far-ma-co-ki-NE-tics','pharmacocinétique'],['pharmacodynamics','far-ma-co-dy-NA-mics','pharmacodynamie'],
+    ['oncology','on-CO-lo-gy','oncologie'],['tumour','TIU-mer','tumeur'],['dose','DOSS','dose'],
+    ['concentration','con-cen-TRAY-shun','concentration'],['clearance','CLEER-rance','clairance'],['half-life','HAAF-life','demi-vie'],
+    ['exposure','ex-PO-zher','exposition'],['mixed-effects model','MIXT ef-FECTS','modèle à effets mixtes'],
+    ['random effect','RAN-dom ef-FECT','effet aléatoire'],['hierarchical','hi-er-AR-chi-cal','hiérarchique'],
+    ['uncertainty','un-CER-tain-ty','incertitude'],['prior / posterior','PRI-or / pos-TEE-ri-or','a priori / a posteriori'],
+    ['simulation','sim-yu-LAY-shun','simulation'],['clinical trial','CLI-ni-cal TRY-al','essai clinique'],
+    ['probability of success','pro-ba-BI-li-ty of suc-CESS','probabilité de succès'],['analysis','a-NA-ly-sis','analyse'],
+    ['analyse (verb)','A-na-lyse','analyser'],['data','DAY-ta','données'],['bias','BAI-as','biais'],
+    ['statistician','sta-tis-TI-shun','statisticien'],['internship','IN-tern-ship','stage'],['pharmaceutical','far-ma-SU-ti-cal','pharmaceutique']
+  ];
+  const wbox=document.getElementById('words');
+  W.forEach(([w,ipa,fr])=>{const d=document.createElement('div');d.className='word';
+    d.innerHTML='<b></b><span class="ipa"></span><br><span class="fr"></span>';
+    d.querySelector('b').textContent=w;d.querySelector('.ipa').textContent=ipa;d.querySelector('.fr').textContent=fr;wbox.appendChild(d)});
+
+  /* Checklist with progress */
+  const C=['I can say the pitch in less than 3 minutes','I can say the pitch with the text hidden','I can explain PK and PD in two sentences',
+    'I know the Servier STAR story','I know the Centre MURAZ STAR story','I know the Vieilles Charrues STAR story','I know the image-sharing project STAR story',
+    'I practised the 18 questions out loud','I know two questions to ask them','I pronounce pharmacokinetics, oncology and analysis correctly',
+    'I use the past simple for my experiences','I timed myself once more on the day'];
+  const box=document.getElementById('checks'),prog=document.getElementById('progress');
+  const update=()=>{const n=C.filter((_,i)=>store.get('c'+i)==='1').length;prog.textContent=Math.round(n/C.length*100)+' %'};
+  C.forEach((txt,i)=>{const l=document.createElement('label');l.className='check';
+    l.innerHTML='<input type="checkbox"><span></span>';l.querySelector('span').textContent=txt;
+    const cb=l.querySelector('input');cb.checked=store.get('c'+i)==='1';l.classList.toggle('done',cb.checked);
+    cb.addEventListener('change',()=>{store.set('c'+i,cb.checked?'1':'0');l.classList.toggle('done',cb.checked);update()});box.appendChild(l)});
+  update();
+})();
+</script>
+</body>
+</html>
